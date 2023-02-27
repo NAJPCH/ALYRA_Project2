@@ -1,0 +1,54 @@
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/Voting.sol
+> Compiling ./node_modules/@openzeppelin/contracts/access/Ownable.sol
+> Compiling ./node_modules/@openzeppelin/contracts/utils/Context.sol
+> Artifacts written to /var/folders/d7/gx4p1rl53yd2w996mrz1p70r0000gn/T/test--4039-cFO0QUcn22jM
+> Compiled successfully using:
+   - solc: 0.8.18+commit.87f61d96.Emscripten.clang
+
+[0m[0m
+[0m  Contract: Voting[0m
+[0m    // ::::::::::::: REGISTRATION ::::::::::::: //[0m
+[0m      Test de la fonction "addVoter"[0m
+      [32m  ✔[0m[90m Vérification de l'enregistrement d'un votant[0m[31m (152ms)[0m
+      [32m  ✔[0m[90m Require: Double enregistrement[0m[31m (217ms)[0m
+      [32m  ✔[0m[90m Require: Pas dans le bon workflow[0m[31m (115ms)[0m
+      [32m  ✔[0m[90m Event: Voteur enregistré[0m[33m (62ms)[0m
+[0m    // ::::::::::::: PROPOSAL ::::::::::::: //[0m
+[0m      Test de la fonction "addProposal"[0m
+      [32m  ✔[0m[90m Vérification de l'enregistrement d'une Proposal[0m[31m (229ms)[0m
+      [32m  ✔[0m[90m Vérification de l'enregistrement d'une Proposal par un non voteur[0m[31m (174ms)[0m
+      [32m  ✔[0m[90m Require: Vous ne pouvez pas ne rien proposer[0m[31m (162ms)[0m
+      [32m  ✔[0m[90m Require: Pas dans le bon workflow[0m[31m (78ms)[0m
+      [32m  ✔[0m[90m Event: Proposal enregistrée[0m[31m (257ms)[0m
+[0m    // ::::::::::::: VOTE ::::::::::::: //[0m
+[0m      Test de la fonction "setVote"[0m
+      [32m  ✔[0m[90m Vérification de l'enregistrement d'un vote[0m[31m (363ms)[0m
+      [32m  ✔[0m[90m Require: Double vote[0m[31m (274ms)[0m
+      [32m  ✔[0m[90m Require: Proposal not found[0m[31m (167ms)[0m
+      [32m  ✔[0m[90m Require: Pas dans le bon workflow[0m[33m (53ms)[0m
+      [32m  ✔[0m[90m Event: Vote enregistrée[0m[31m (204ms)[0m
+[0m    // ::::::::::::: STATE ::::::::::::: //[0m
+[0m      Test de la fonction "startProposalsRegistering"[0m
+      [32m  ✔[0m[90m Require: Registering proposals cant be started now[0m[31m (150ms)[0m
+      [32m  ✔[0m[90m Vérification de la proposal GENESIS[0m
+      [32m  ✔[0m[90m Enum: Vérificion du changement d'état du workflow[0m
+[0m      Test de la fonction "endProposalsRegistering"[0m
+      [32m  ✔[0m[90m Require: Registering proposals havent started yet[0m
+      [32m  ✔[0m[90m Enum: Vérificion du changement d'état du workflow[0m[33m (56ms)[0m
+[0m      Test de la fonction "startVotingSession"[0m
+      [32m  ✔[0m[90m Require: Registering proposals phase is not finished[0m
+      [32m  ✔[0m[90m Enum: Vérificion du changement d'état du workflow[0m[31m (109ms)[0m
+[0m      Test de la fonction "startVotingSession"[0m
+      [32m  ✔[0m[90m Require: Voting session havent started yet[0m
+      [32m  ✔[0m[90m Enum: Vérificion du changement d'état du workflow[0m[31m (132ms)[0m
+[0m      Test de la fonction "tallyVotes"[0m
+      [32m  ✔[0m[90m Vérification de la Proposal gagnante[0m[31m (532ms)[0m
+      [32m  ✔[0m[90m Require: Current status is not voting session ended[0m
+      [32m  ✔[0m[90m Enum: Vérificion du changement d'état du workflow[0m[31m (152ms)[0m
+
+
+[92m [0m[32m 26 passing[0m[90m (5s)[0m
+
