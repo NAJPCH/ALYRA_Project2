@@ -1,14 +1,14 @@
 # Projet N°2
 
 # Sommaire
-- :white_check_mark: [Test de la fonction "addVoter"](#test-de-la-fonction-addvoter)
-- :white_check_mark: [Test de la fonction "addProposal"](#test-de-la-fonction-addproposal)
-- :white_check_mark: [Test de la fonction "setVote"](#test-de-la-fonction-setvote)
-- :white_check_mark: [Test de la fonction "startProposalsRegistering"](#test-de-la-fonction-startproposalsregistering)
-- :white_check_mark: [Test de la fonction "endProposalsRegistering"](#test-de-la-fonction-endproposalsregistering)
-- :white_check_mark: [Test de la fonction "startVotingSession"](#test-de-la-fonction-startvotingsession)
-- :white_check_mark: [Test de la fonction "endVotingSession"](#test-de-la-fonction-endvotingsession)
-- :white_check_mark: [Test de la fonction "tallyVotes"](#test-de-la-fonction-tallyvotes)
+- [Test de la fonction "addVoter"](#test-de-la-fonction-addvoter)
+- [Test de la fonction "addProposal"](#test-de-la-fonction-addproposal)
+- [Test de la fonction "setVote"](#test-de-la-fonction-setvote)
+- [Test de la fonction "startProposalsRegistering"](#test-de-la-fonction-startproposalsregistering)
+- [Test de la fonction "endProposalsRegistering"](#test-de-la-fonction-endproposalsregistering)
+- [Test de la fonction "startVotingSession"](#test-de-la-fonction-startvotingsession)
+- [Test de la fonction "endVotingSession"](#test-de-la-fonction-endvotingsession)
+- [Test de la fonction "tallyVotes"](#test-de-la-fonction-tallyvotes)
 
 # REGISTRATION
 ## Test de la fonction "addVoter"
