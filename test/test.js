@@ -24,7 +24,7 @@ contract("Voting", accounts => {
       it('Vérification de l\'enregistrement d\'un votant', async () => {
         await votingInstance.addVoter( voter1,{from: owner});
         await votingInstance.addVoter( owner,{from: owner});
-        const txGetVoter =  await votingInstance.getVoter( voter1,{from: owner});
+        const txGetVoter =  await votingInstance.getVoter.call( voter1,{from: owner});
         expect(txGetVoter.isRegistered).to.equal(true);
       });
       
@@ -57,7 +57,7 @@ contract("Voting", accounts => {
         await votingInstance.addVoter( owner,{from: owner});
         await votingInstance.startProposalsRegistering()
         const txAddProposal=  await votingInstance.addProposal("My Proposal",{from: owner});
-        let getProposal = await votingInstance.getOneProposal(1);
+        let getProposal = await votingInstance.getOneProposal.call(1);
         expect(getProposal.description).to.be.equal("My Proposal"," ECHEC, Attente du mot `My Proposal`  Poposal");
       });
 
@@ -82,7 +82,7 @@ contract("Voting", accounts => {
         await votingInstance.addVoter( owner,{from: owner});
         await votingInstance.startProposalsRegistering()
         const txAddProposal=  await votingInstance.addProposal("My Proposal",{from: owner});
-        let getProposal = await votingInstance.getOneProposal(1);
+        let getProposal = await votingInstance.getOneProposal.call(1);
         expectEvent(txAddProposal, 'ProposalRegistered', { proposalId: new BN(1) });
       });
 
@@ -106,7 +106,7 @@ contract("Voting", accounts => {
         await votingInstance.startVotingSession();
         await votingInstance.setVote( new BN(1),{from: voter1});
         const txSetVote2 = await votingInstance.setVote( new BN(1),{from: owner});
-        let getProposal = await votingInstance.getOneProposal(1);
+        let getProposal = await votingInstance.getOneProposal.call(1);
         expect(getProposal.voteCount).to.be.bignumber.equal(new BN(2)," ECHEC, Cette Poposal aurait du avoir 2 votes");
       });
 
@@ -117,7 +117,7 @@ contract("Voting", accounts => {
         await votingInstance.addProposal( "Proposal 2",{from: owner});
         await votingInstance.endProposalsRegistering();
         await votingInstance.startVotingSession();
-        const getVote1 = await votingInstance.setVote( new BN(1),{from: owner});
+        await votingInstance.setVote( new BN(1),{from: owner});
         await expectRevert(votingInstance.setVote( new BN(2),{from: owner}) , "You have already voted");
       });
       
@@ -164,7 +164,7 @@ contract("Voting", accounts => {
 
       it('Vérification de la proposal GENESIS', async () => {
         const txStartProposalsRegistering =  await votingInstance.startProposalsRegistering();
-        let getGenesisProposal = await votingInstance.getOneProposal(0);
+        let getGenesisProposal = await votingInstance.getOneProposal.call(0);
         expect(getGenesisProposal.description).to.be.equal("GENESIS"," ECHEC, Attente du mot GENESIS en prepière Poposal");
       });
       
