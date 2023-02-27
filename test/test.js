@@ -29,18 +29,18 @@ contract("Voting", accounts => {
       });
       
       it('Require: Double enregistrement', async () => {
-        const txAddVoter =  await votingInstance.addVoter( owner,{from: owner});
-        await expectRevert(votingInstance.addVoter(owner,{from: owner}), "Already registered");
+        await votingInstance.addVoter( voter1,{from: owner});
+        await expectRevert(votingInstance.addVoter(voter1,{from: owner}), "Already registered");
       });
 
       it('Require: Pas dans le bon workflow', async () => {
-        const txAddVoter =  await votingInstance.startProposalsRegistering();
-        await expectRevert(votingInstance.addVoter(owner,{from: owner}), "Voters registration is not open yet");
+        await votingInstance.startProposalsRegistering();
+        await expectRevert(votingInstance.addVoter(voter1,{from: owner}), "Voters registration is not open yet");
       });
       
       it('Event: Voteur enregistré', async () => {
-        const txAddVoter =  await votingInstance.addVoter( owner,{from: owner});
-        expectEvent(txAddVoter, 'VoterRegistered', { voterAddress: owner });
+        const txAddVoter =  await votingInstance.addVoter( voter1,{from: owner});
+        expectEvent(txAddVoter, 'VoterRegistered', { voterAddress: voter1 });
       });
 
     });
@@ -59,7 +59,12 @@ contract("Voting", accounts => {
         const txAddProposal=  await votingInstance.addProposal("My Proposal",{from: owner});
         let getProposal = await votingInstance.getOneProposal(1);
         expect(getProposal.description).to.be.equal("My Proposal"," ECHEC, Attente du mot `My Proposal`  Poposal");
-      
+      });
+
+      it('Vérification de l\'enregistrement d\'une Proposal par un non voteur', async () => {
+        await votingInstance.addVoter( owner,{from: owner});
+        await votingInstance.startProposalsRegistering()
+        await expectRevert(votingInstance.addProposal("My Proposal even I can not",{from: fakeVoter1}), "You're not a voter");
       });
       
       it('Require: Vous ne pouvez pas ne rien proposer', async () => {
@@ -238,13 +243,16 @@ contract("Voting", accounts => {
         await votingInstance.addVoter( owner,{from: owner});
         await votingInstance.addVoter( voter1,{from: owner});
         await votingInstance.addVoter( voter2,{from: owner});
+        await votingInstance.addVoter( voter3,{from: owner});
         await votingInstance.startProposalsRegistering();
         await votingInstance.addProposal( "Proposal 1",{from: owner});
         await votingInstance.addProposal( "Proposal 2",{from: voter1});
+        await votingInstance.addProposal( "Proposal 3",{from: voter3});
         await votingInstance.endProposalsRegistering();
         await votingInstance.startVotingSession();
         await votingInstance.setVote( new BN(2),{from: voter1});
         await votingInstance.setVote( new BN(2),{from: voter2});
+        await votingInstance.setVote( new BN(2),{from: voter3});
         await votingInstance.setVote( new BN(1),{from: owner});
         await votingInstance.endVotingSession();
         await votingInstance.tallyVotes({from: owner});
