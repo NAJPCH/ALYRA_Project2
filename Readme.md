@@ -75,5 +75,13 @@ Cette fonction permet de compter les votes et d'identifier la proposition gagnan
 - :white_check_mark: Vérification du changement d'état du workflow
 - :white_check_mark: Vérification du message d'erreur en cas d'état du workflow incorrect
 
+
+# GETTERS
+## Test de la fonction "getVoter"
+- :white_check_mark: Effectué par le test de la fonction "addVoter"
+
+## Test de la fonction "getOneProposal"
+- :white_check_mark: Effectué par le test de la fonction "addProposal"
+
 # Screenshots des coverages
-![Coverages](/assets/ScreenShots.png "Coverages")
+![Coverages](/assets/ScreenShots.png)
