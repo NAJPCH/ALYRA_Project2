@@ -29,17 +29,17 @@ contract("Voting", accounts => {
       });
       
       it('Require: Double enregistrement', async () => {
-        const txAddVoter =  await votingInstance.addVoter( accounts[0],{from: owner});
-        await expectRevert(votingInstance.addVoter(accounts[0],{from: owner}), "Already registered");
+        const txAddVoter =  await votingInstance.addVoter( owner,{from: owner});
+        await expectRevert(votingInstance.addVoter(owner,{from: owner}), "Already registered");
       });
 
       it('Require: Pas dans le bon workflow', async () => {
         const txAddVoter =  await votingInstance.startProposalsRegistering();
-        await expectRevert(votingInstance.addVoter(accounts[0],{from: owner}), "Voters registration is not open yet");
+        await expectRevert(votingInstance.addVoter(owner,{from: owner}), "Voters registration is not open yet");
       });
       
       it('Event: Voteur enregistré', async () => {
-        const txAddVoter =  await votingInstance.addVoter( accounts[0],{from: owner});
+        const txAddVoter =  await votingInstance.addVoter( owner,{from: owner});
         expectEvent(txAddVoter, 'VoterRegistered', { voterAddress: owner });
       });
 
@@ -147,7 +147,7 @@ contract("Voting", accounts => {
 
       beforeEach(async function () {
         votingInstance = await Voting.new({from: owner});
-        await votingInstance.addVoter( accounts[0],{from: owner});
+        await votingInstance.addVoter( owner,{from: owner});
       })
         
       it('Require: Registering proposals cant be started now', async () => {
