@@ -15,7 +15,8 @@
 
 Cette fonction permet d'enregistrer un votant. Les tests effectués sont les suivants :
 
-- :white_check_mark: Vérification de l'enregistrement d'un votant
+- :white_check_mark: Vérification de l'enregistrement d'un votant par un Admin
+- :white_check_mark: Vérification de l'enregistrement d'un votant par un voteur
 - :white_check_mark: Vérification du message d'erreur en cas d'enregistrement déjà effectué
 - :white_check_mark: Vérification du message d'erreur en cas d'état du workflow incorrect
 
@@ -76,11 +77,18 @@ Cette fonction permet de compter les votes et d'identifier la proposition gagnan
 - :white_check_mark: Vérification du message d'erreur en cas d'état du workflow incorrect
 
 
-# GETTERS
+# GETTERS - Spécifique
 ## Test de la fonction "getVoter"
 - :white_check_mark: Effectué par le test de la fonction "addVoter"
 
 ## Test de la fonction "getOneProposal"
+- :white_check_mark: Effectué par le test de la fonction "addProposal"
+
+# AUTRE - Spécifique
+## Test de OnlyOwner
+- :white_check_mark: Effectué par le test de la fonction "addVoter"
+
+## Test de OnlyVoter
 - :white_check_mark: Effectué par le test de la fonction "addProposal"
 
 # Screenshots des coverages
