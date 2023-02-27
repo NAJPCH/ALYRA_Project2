@@ -21,11 +21,15 @@ contract("Voting", accounts => {
         votingInstance = await Voting.new({from: owner});
       })
         
-      it('Vérification de l\'enregistrement d\'un votant', async () => {
+      it('Vérification de l\'enregistrement d\'un votant l\'admin', async () => {
         await votingInstance.addVoter( voter1,{from: owner});
         await votingInstance.addVoter( owner,{from: owner});
         const txGetVoter =  await votingInstance.getVoter.call( voter1,{from: owner});
         expect(txGetVoter.isRegistered).to.equal(true);
+      });
+
+      it('Vérification de l\'enregistrement d\'un votant par un voteur', async () => {
+        await expectRevert(votingInstance.addVoter(voter1 ,{from: voter1}), "Ownable: caller is not the owner");
       });
       
       it('Require: Double enregistrement', async () => {
