@@ -25,6 +25,7 @@ Cette fonction permet d'enregistrer un votant. Les tests effectués sont les sui
 Cette fonction permet d'enregistrer une proposition. Les tests effectués sont les suivants :
 
 - :white_check_mark: Vérification de l'enregistrement d'une proposition
+- :white_check_mark: Vérification de l'enregistrement d'une proposition par un non voteur
 - :white_check_mark: Vérification du message d'erreur en cas de description vide
 - :white_check_mark: Vérification du message d'erreur en cas d'état du workflow incorrect
 
