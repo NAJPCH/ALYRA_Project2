@@ -73,3 +73,6 @@ Cette fonction permet de compter les votes et d'identifier la proposition gagnan
 - :white_check_mark: Vérification de l'identification de la proposition gagnante
 - :white_check_mark: Vérification du changement d'état du workflow
 - :white_check_mark: Vérification du message d'erreur en cas d'état du workflow incorrect
+
+# Screenshots des coverages
+![Coverages](/assets/ScreenShots.png "Coverages")
