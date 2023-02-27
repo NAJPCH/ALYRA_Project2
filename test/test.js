@@ -13,7 +13,6 @@ contract("Voting", accounts => {
   const fakeVoter1 = accounts[4];
   
   let votingInstance;
-  //votingInstance = new Voting();
 
   context('// ::::::::::::: REGISTRATION ::::::::::::: //', function() {
     describe('Test de la fonction "addVoter"', function() {
@@ -59,7 +58,6 @@ contract("Voting", accounts => {
         await votingInstance.startProposalsRegistering()
         const txAddProposal=  await votingInstance.addProposal("My Proposal",{from: owner});
         let getProposal = await votingInstance.getOneProposal(1);
-        //console.log(getProposal.description);
         expect(getProposal.description).to.be.equal("My Proposal"," ECHEC, Attente du mot `My Proposal`  Poposal");
       
       });
@@ -67,12 +65,10 @@ contract("Voting", accounts => {
       it('Require: Vous ne pouvez pas ne rien proposer', async () => {
         await votingInstance.addVoter( owner,{from: owner});
         await votingInstance.startProposalsRegistering()
-        //await votingInstance.addProposal( "Proposal 0",{from: owner});
         await expectRevert(votingInstance.addProposal("",{from: owner}), "Vous ne pouvez pas ne rien proposer");
       });
 
       it('Require: Pas dans le bon workflow', async () => {
-        //await votingInstance.startProposalsRegistering();
         await votingInstance.addVoter( owner,{from: owner});
         await expectRevert(votingInstance.addProposal("My Proposal",{from: owner}), "Proposals are not allowed yet");
       });
@@ -126,12 +122,10 @@ contract("Voting", accounts => {
         await votingInstance.startProposalsRegistering();
         await votingInstance.endProposalsRegistering();
         await votingInstance.startVotingSession();
-        //await votingInstance.setVote( "Proposal 1",{from: owner});
         await expectRevert(votingInstance.setVote(1,{from: owner}), "Proposal not found");
       });
 
       it('Require: Pas dans le bon workflow', async () => {
-        //await votingInstance.startProposalsRegistering();
         await votingInstance.addVoter( owner,{from: owner});
         await expectRevert(votingInstance.setVote(new BN(1),{from: owner}), "Voting session havent started yet");
       });
@@ -167,15 +161,12 @@ contract("Voting", accounts => {
       it('Vérification de la proposal GENESIS', async () => {
         const txStartProposalsRegistering =  await votingInstance.startProposalsRegistering();
         let getGenesisProposal = await votingInstance.getOneProposal(0);
-        //console.log(getGenesisProposal.description);
         expect(getGenesisProposal.description).to.be.equal("GENESIS"," ECHEC, Attente du mot GENESIS en prepière Poposal");
       });
       
       
       it('Enum: Vérificion du changement d\'état du workflow', async () => {
         const txStartProposalsRegistering =  await votingInstance.startProposalsRegistering();
-        //let _previousStatus = votingInstance.workflowStatus;
-        //console.log(_previousStatus);
         expectEvent(txStartProposalsRegistering, 'WorkflowStatusChange', { previousStatus: new BN(0), newStatus: new BN(1)  });
       });
 
@@ -257,11 +248,7 @@ contract("Voting", accounts => {
         await votingInstance.setVote( new BN(2),{from: voter2});
         await votingInstance.setVote( new BN(1),{from: owner});
         await votingInstance.endVotingSession();
-        //let getProposal = await votingInstance.getOneProposal(1);
-        //const txTallyVotes =  
         await votingInstance.tallyVotes({from: owner});
-        //console.log(txTallyVotes.winningProposalID);
-        //console.log(votingInstance.winningProposalID);
         const FinalWinningProposalID = await votingInstance.winningProposalID();
         console.log(FinalWinningProposalID);
         expect(FinalWinningProposalID).to.be.bignumber.equal( new BN(2)," ECHEC, La `Poposal 2` aurait du gagner avec 2 votes");
