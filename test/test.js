@@ -102,7 +102,6 @@ contract("Voting", accounts => {
         await votingInstance.setVote( new BN(1),{from: voter1});
         const txSetVote2 = await votingInstance.setVote( new BN(1),{from: owner});
         let getProposal = await votingInstance.getOneProposal(1);
-        console.log(getProposal.voteCount);
         expect(getProposal.voteCount).to.be.bignumber.equal(new BN(2)," ECHEC, Cette Poposal aurait du avoir 2 votes");
       });
 
@@ -250,7 +249,6 @@ contract("Voting", accounts => {
         await votingInstance.endVotingSession();
         await votingInstance.tallyVotes({from: owner});
         const FinalWinningProposalID = await votingInstance.winningProposalID();
-        console.log(FinalWinningProposalID);
         expect(FinalWinningProposalID).to.be.bignumber.equal( new BN(2)," ECHEC, La `Poposal 2` aurait du gagner avec 2 votes");
       });
         
